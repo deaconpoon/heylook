@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HeyLook
 
-## Getting Started
+A collaborative tool designed to streamline the QA process and design feedback workflow between designers, developers, and QA teams.
 
-First, run the development server:
+## Features
+
+- **Website Rendering & Interaction**: View and interact with live websites within the application
+- **Annotation Tools**: Draw, measure, comment, and capture screenshots
+- **Design Comparison**: Side-by-side viewing of Figma designs and live websites
+- **Collaboration**: Real-time cursor tracking and visual presence indicators
+- **Issue Documentation**: Create, manage, and export identified issues
+
+## Tech Stack
+
+- **Frontend**: Next.js, TypeScript, Redux Toolkit, Tailwind CSS, shadcn/ui
+- **Backend**: Next.js API routes, Supabase
+- **Infrastructure**: Vercel, Supabase
+
+## Development
+
+### Prerequisites
+
+- Node.js 18 or higher
+- npm 8 or higher
+
+### Installation
+
+```bash
+npm install
+```
+
+### Running the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Building for Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## CI/CD
 
-## Learn More
+This project uses GitHub Actions for continuous integration and deployment:
 
-To learn more about Next.js, take a look at the following resources:
+- **CI**: Linting, type-checking, and testing on push/PR to main branch
+- **CD**: Automated deployment to Vercel on push to main branch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a feature branch: `git checkout -b feature/my-feature`
+2. Make your changes
+3. Commit with conventional commits: `feat: add new feature`
+4. Push to your branch: `git push origin feature/my-feature`
+5. Open a Pull Request
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT

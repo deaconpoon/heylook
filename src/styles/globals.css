@@ -1,0 +1,38 @@
+@import "tailwindcss/preflight";
+@tailwind utilities;
+
+:root {
+  /* Brand Colors */
+  --look-blue: #3d7aff;
+  --look-pink: #ff5c87;
+  --look-purple: #7b61ff;
+
+  /* Secondary Colors */
+  --soft-cream: #fff3e0;
+  --neutral-gray: #f5f7fa;
+  --dark-gray: #333333;
+
+  /* Semantic Colors */
+  --success: #4cd964;
+  --warning: #ff9500;
+  --error: #ff3b30;
+  --info: #5ac8fa;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-gray text-dark-gray;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 rounded-2xl shadow-lg;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-look-blue to-look-purple;
+  }
+}
