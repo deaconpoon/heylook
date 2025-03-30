@@ -63,8 +63,9 @@ This project uses GitHub Actions for continuous integration and deployment:
 1. Create a feature branch: `git checkout -b feature/my-feature`
 2. Make your changes
 3. Commit with conventional commits: `feat: add new feature`
-4. Push to your branch: `git push origin feature/my-feature`
-5. Open a Pull Request
+4. Ensure commits are signed for verification
+5. Push to your branch: `git push origin feature/my-feature`
+6. Open a Pull Request
 
 ## License
 
