@@ -12,7 +12,7 @@ A collaborative tool designed to streamline the QA process and design feedback w
 
 ## Tech Stack
 
-- **Frontend**: Next.js, TypeScript, Redux Toolkit, Tailwind CSS, shadcn/ui
+- **Frontend**: Next.js, TypeScript, React 19, Tailwind CSS, shadcn/ui
 - **Backend**: Next.js API routes, Supabase
 - **Infrastructure**: Vercel, Supabase
 
@@ -40,6 +40,16 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Deployment
+
+### Troubleshooting
+
+If you encounter build issues with PostCSS configuration, ensure that:
+
+1. Only one PostCSS configuration file exists (postcss.config.js)
+2. No references to non-existent packages like @tailwindcss/postcss
+3. The Next.js configuration properly supports the src/app directory structure
 
 ## CI/CD
 
