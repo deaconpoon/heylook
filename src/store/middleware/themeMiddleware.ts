@@ -2,13 +2,13 @@ import { Middleware, AnyAction } from '@reduxjs/toolkit';
 
 // Using a simpler type approach to avoid circular references
  
-export const themeMiddleware: Middleware = () => next => (action: AnyAction) => {
+export const themeMiddleware: Middleware = () => next => (action: unknown) => {
   // First, process the action normally
   const result = next(action);
 
   // Handle theme changes
-  if (action.type === 'ui/setTheme') {
-    const theme = action.payload;
+  if (typeof action === 'object' && action && 'type' in action && action.type === 'ui/setTheme') {
+    const theme = (action as AnyAction).payload;
     
     // Update localStorage
     if (typeof window !== 'undefined') {

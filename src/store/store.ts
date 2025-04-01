@@ -1,14 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import uiReducer from './slices/uiSlice';
-import sessionReducer from './slices/sessionSlice';
-import userReducer from './slices/userSlice';
-import { themeMiddleware } from './middleware/themeMiddleware';
+import uiReducer from '@/store/slices/uiSlice';
+import sessionReducer from '@/store/slices/sessionSlice';
+import userReducer from '@/store/slices/userSlice';
+import { themeMiddleware } from '@/store/middleware/themeMiddleware';
 
 // Import state types to correctly type RootState
-import type { UiState } from './slices/uiSlice';
-import type { SessionState } from './slices/sessionSlice';
-import type { UserState } from './slices/userSlice';
+import type { UiState } from '@/store/slices/uiSlice';
+import type { SessionState } from '@/store/slices/sessionSlice';
+import type { UserState } from '@/store/slices/userSlice';
 
 // Create explicit RootState type with known shapes
 export interface RootState {
@@ -23,7 +23,7 @@ export const store = configureStore({
     session: sessionReducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) => 
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types

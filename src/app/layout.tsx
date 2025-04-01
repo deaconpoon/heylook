@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "../styles/globals.css";
 import ReduxProvider from "@/components/providers/ReduxProvider";
-import ThemeToggle from "../components/atoms/ThemeToggle";
+import ThemeToggle from "@/components/atoms/ThemeToggle/ThemeToggle";
 
 const inter = Inter({
   subsets: ["latin"],

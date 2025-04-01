@@ -1,6 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
 import ThemeToggle from "./ThemeToggle";
-import ThemeProvider from "../../providers/ThemeProvider";
+import uiReducer, { Theme } from "@/store/slices/uiSlice";
+
+// Create a mock store for Storybook
+const mockStore = configureStore({
+  reducer: {
+    ui: uiReducer,
+    // Add other reducers as needed for the component
+    session: (state = {}) => state,
+    user: (state = {}) => state,
+  },
+  preloadedState: {
+    ui: {
+      theme: "light" as Theme,
+      sidebarOpen: true,
+      activeToolId: null,
+      modals: {},
+    },
+    // Add other initial states as needed
+  },
+});
 
 // Meta data for the component
 const meta: Meta<typeof ThemeToggle> = {
@@ -11,11 +32,11 @@ const meta: Meta<typeof ThemeToggle> = {
   },
   decorators: [
     (Story) => (
-      <ThemeProvider>
+      <Provider store={mockStore}>
         <div className="p-4">
           <Story />
         </div>
-      </ThemeProvider>
+      </Provider>
     ),
   ],
   tags: ["autodocs"],
