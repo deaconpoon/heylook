@@ -1,28 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
-type Theme = "light" | "dark";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { setTheme } from "@/store/slices/uiSlice";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState<Theme>("light");
-
-  useEffect(() => {
-    const savedTheme = window.localStorage.getItem("theme") as Theme | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector((state) => state.ui.theme);
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    window.localStorage.setItem("theme", newTheme);
+    dispatch(setTheme(theme === "dark" ? "light" : "dark"));
   };
 
   return (

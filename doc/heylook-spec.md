@@ -384,19 +384,71 @@ ComponentName/
 
 ### 5.4 State Management Organization
 
-Redux store will be organized by domain:
+HeyLook uses Redux Toolkit for centralized state management, providing a predictable and maintainable approach to handling application state. The Redux store is organized by domain:
 
-- **Entities:** Projects, sessions, annotations, issues
-- **UI State:** Active tools, modal states, sidebar visibility
-- **Session State:** Collaboration data, presence information
-- **User State:** Current user, permissions, preferences
+- **UI State:** Theme, sidebar visibility, active tools, modal states
+- **Session State:** Active session, participants, collaboration data, viewport size
+- **User State:** Current user, authentication status, user preferences
+- **Entities:** Projects, annotations, issues, comments
 
-Each slice will have a clear separation of:
+Each domain is implemented as a separate slice with the following structure:
 
-- State definition
-- Reducers
-- Thunks for async operations
-- Selectors for accessing state
+```typescript
+// Example slice structure (uiSlice.ts)
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+export interface UiState {
+  theme: 'light' | 'dark';
+  sidebarOpen: boolean;
+  activeToolId: string | null;
+  modals: Record<string, boolean>;
+}
+
+const uiSlice = createSlice({
+  name: 'ui',
+  initialState: { ... },
+  reducers: {
+    setTheme: (state, action: PayloadAction<'light' | 'dark'>) => {
+      state.theme = action.payload;
+    },
+    // Other reducers...
+  },
+});
+
+// Actions
+export const { setTheme, ... } = uiSlice.actions;
+
+// Selectors
+export const selectTheme = (state) => state.ui.theme;
+```
+
+The Redux store follows these principles:
+
+1. **Clear Separation of Concerns:**
+
+   - State definition via TypeScript interfaces
+   - Actions and reducers for state updates
+   - Selectors for accessing state
+   - Thunks for async operations
+
+2. **Middleware for Side Effects:**
+
+   - Theme changes trigger DOM and localStorage updates
+   - Authentication events handle tokens and sessions
+   - Real-time updates synchronize with WebSocket events
+
+3. **Normalized State Structure:**
+
+   - Entities stored by ID in lookup objects
+   - Relationships maintained through IDs rather than nesting
+   - Denormalized views created through selectors
+
+4. **Performance Optimizations:**
+   - Memoized selectors for derived data
+   - Component-level re-render optimization
+   - Selective subscription to state changes
+
+The central Redux provider wraps the application at the root level, making the store available throughout the component tree, while maintaining strong typing with TypeScript for type safety and developer experience.
 
 ## 6. User Interface Design
 

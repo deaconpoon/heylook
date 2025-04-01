@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "../styles/globals.css";
-import ThemeProvider from "@/components/providers/ThemeProvider";
-import ThemeToggle from "@/components/atoms/ThemeToggle";
+import ReduxProvider from "@/components/providers/ReduxProvider";
+import ThemeToggle from "../components/atoms/ThemeToggle";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,12 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="relative">
-        <ThemeProvider>
+        <ReduxProvider>
           <header className="fixed top-4 right-4 z-50">
             <ThemeToggle />
           </header>
           {children}
-        </ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
