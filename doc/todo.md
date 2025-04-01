@@ -17,22 +17,23 @@ This document outlines the step-by-step implementation plan for the HeyLook appl
 
 ### Prompt 1: Initial Next.js Project Setup
 
-- [ ] Create new Next.js project with TypeScript
-- [ ] Configure ESLint and Prettier
-- [ ] Set up folder structure following atomic design
-- [ ] Create basic package.json with dependencies
-- [ ] Implement configuration files (.gitignore, tsconfig.json)
-- [ ] Create simple root layout and home page
-- [ ] Write project README
+- [x] Create new Next.js project with TypeScript
+- [x] Configure ESLint and Prettier
+- [x] Set up folder structure following atomic design
+- [x] Create basic package.json with dependencies
+- [x] Implement configuration files (.gitignore, tsconfig.json)
+- [x] Create simple root layout and home page
+- [x] Write project README
 
 ### Prompt 2: Tailwind CSS and Design System Setup
 
-- [ ] Install and configure Tailwind CSS
-- [ ] Create tailwind.config.js with design system specs
-- [ ] Implement globals.css with base styles
-- [ ] Update home page with Tailwind classes
-- [ ] Create theme toggle (light/dark)
-- [ ] Build visual demonstration of design system
+- [x] Install and configure Tailwind CSS
+- [x] Create tailwind.config.js with design system specs
+- [x] Implement globals.css with base styles
+- [x] Update home page with Tailwind classes
+- [x] Create theme toggle (light/dark)
+- [x] Build visual demonstration of design system
+- [x] Set up Storybook to document design system components
 
 ### Prompt 3: shadcn/ui Component Integration
 

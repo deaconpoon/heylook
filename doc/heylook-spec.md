@@ -65,14 +65,16 @@ The initial release of HeyLook will focus on these core capabilities:
 
 ### 3.1 Technology Stack
 
-- **Frontend:** 
+- **Frontend:**
+
   - Next.js for the React framework
   - TypeScript for type safety
   - Redux Toolkit for state management
   - Tailwind CSS for styling
   - shadcn/ui for UI components
 
-- **Backend:** 
+- **Backend:**
+
   - Next.js API routes for server functionality
   - Supabase for authentication and database
 
@@ -93,21 +95,21 @@ The initial release of HeyLook will focus on these core capabilities:
 // Example proxy endpoint
 export default async function handler(req, res) {
   const { url } = req.query;
-  
+
   try {
     const response = await fetch(url);
     const html = await response.text();
-    
+
     // Modify HTML to add necessary attributes and scripts
     const modifiedHtml = addTracking(html);
-    
+
     // Set appropriate headers
-    res.setHeader('Content-Type', 'text/html');
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-    
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("X-Frame-Options", "SAMEORIGIN");
+
     return res.send(modifiedHtml);
   } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch website' });
+    return res.status(500).json({ error: "Failed to fetch website" });
   }
 }
 ```
@@ -150,6 +152,7 @@ export default async function handler(req, res) {
 ### 4.1 Core Tables
 
 #### users
+
 - id (primary key, provided by Supabase Auth)
 - email
 - display_name
@@ -158,6 +161,7 @@ export default async function handler(req, res) {
 - last_active_at
 
 #### projects
+
 - id (primary key)
 - name
 - description
@@ -169,6 +173,7 @@ export default async function handler(req, res) {
 - is_archived (boolean)
 
 #### sessions
+
 - id (primary key)
 - project_id (foreign key to projects)
 - started_by (foreign key to users)
@@ -177,6 +182,7 @@ export default async function handler(req, res) {
 - session_data (JSONB - for configuration settings)
 
 #### annotations
+
 - id (primary key)
 - session_id (foreign key to sessions)
 - created_by (foreign key to users)
@@ -190,6 +196,7 @@ export default async function handler(req, res) {
 - resolved_at (timestamp, nullable)
 
 #### issue_reports
+
 - id (primary key)
 - session_id (foreign key to sessions)
 - reported_by (foreign key to users)
@@ -287,7 +294,7 @@ src/
 │   │   ├── Button/
 │   │   ├── Input/
 │   │   └── ...
-│   ├── molecules/               # Molecular components 
+│   ├── molecules/               # Molecular components
 │   │   ├── CommentCard/
 │   │   ├── FormField/
 │   │   └── ...
@@ -303,6 +310,12 @@ src/
 │       ├── SessionProvider/
 │       ├── CollaborationProvider/
 │       └── ...
+├── stories/                     # Storybook stories
+│   ├── design-system/           # Design system documentation
+│   │   ├── Colors.stories.tsx   # Color palette documentation
+│   │   ├── Typography.stories.tsx # Typography system documentation
+│   │   └── Components.stories.tsx # UI components documentation
+│   └── Introduction.mdx         # Storybook introduction
 ├── hooks/                       # Custom React hooks
 │   ├── useAnnotation.ts
 │   ├── useCollaboration.ts
@@ -327,6 +340,35 @@ src/
     └── ...
 ```
 
+### 5.2.1 Storybook Configuration
+
+```
+.storybook/                      # Storybook configuration
+├── main.ts                      # Main Storybook configuration
+│   └── storybookOrder           # Custom order for story organization
+├── preview.ts                   # Preview configuration for themes and viewport
+├── manager.ts                   # Storybook manager UI customization
+└── theme.ts                     # Custom Storybook theme
+```
+
+The Storybook configuration is set up to organize components according to the atomic design methodology. The `main.ts` file includes a custom `storybookOrder` that ensures stories appear in the sidebar in the correct hierarchical order:
+
+1. Atoms
+2. Molecules
+3. Organisms
+4. Templates
+5. Design System documentation
+
+The design system documentation in Storybook serves as the definitive source of truth for the UI components, showing both the implementation and usage guidelines. Each component includes:
+
+- Interactive examples
+- PropTypes documentation
+- Usage guidelines
+- Accessibility considerations
+- Code examples
+
+This ensures consistency across the application and provides a living reference for designers and developers.
+
 ### 5.3 Component Architecture
 
 Each component will follow a consistent structure:
@@ -350,6 +392,7 @@ Redux store will be organized by domain:
 - **User State:** Current user, permissions, preferences
 
 Each slice will have a clear separation of:
+
 - State definition
 - Reducers
 - Thunks for async operations
@@ -402,21 +445,25 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 #### 6.5.2 Color Palette
 
 **Primary Colors:**
+
 - **Look Blue:** `#3D7AFF` - Main brand color, used for primary actions and brand elements
 - **Look Pink:** `#FF5C87` - Accent color for highlights and important elements
 - **Look Purple:** `#7B61FF` - Secondary accent for visual interest
 
 **Secondary Colors:**
+
 - **Soft Cream:** `#FFF3E0` - Background color for content areas
 - **Neutral Gray:** `#F5F7FA` - Background for UI components
 - **Dark Gray:** `#333333` - Text and icons
 
 **Gradients:**
+
 - **Primary Gradient:** Linear from `#3D7AFF` to `#7B61FF`
 - **Accent Gradient:** Linear from `#FF5C87` to `#FFAA5C`
 - **Background Gradient:** Soft blue sky gradient similar to Aimee app
 
 **Semantic Colors:**
+
 - **Success:** `#4CD964` - For successful actions and positive states
 - **Warning:** `#FF9500` - For warnings and attention-needed states
 - **Error:** `#FF3B30` - For errors and critical states
@@ -425,11 +472,13 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 #### 6.5.3 Typography
 
 **Font Families:**
+
 - **Primary Font:** Inter - Clean, modern sans-serif for general UI
 - **Display Font:** Montserrat - For headings and larger display text
 - **Monospace:** SF Mono - For code and technical elements
 
 **Font Sizes:**
+
 - **Display:** 32px / 2rem - Page titles
 - **Heading 1:** 24px / 1.5rem - Section headings
 - **Heading 2:** 20px / 1.25rem - Subsection headings
@@ -438,6 +487,7 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 - **Tiny:** 12px / 0.75rem - Labels and annotations
 
 **Font Weights:**
+
 - Light: 300
 - Regular: 400
 - Medium: 500
@@ -447,6 +497,7 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 #### 6.5.4 UI Components
 
 **Cards and Panels:**
+
 - Glassmorphism effect with `backdrop-filter: blur(10px)`
 - Semi-transparent backgrounds (80-90% opacity)
 - Subtle border with 1px stroke
@@ -454,6 +505,7 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 - Light drop shadow: `0 8px 32px rgba(0, 0, 0, 0.1)`
 
 **Buttons:**
+
 - Primary: Filled with gradient background
 - Secondary: Outlined with transparency
 - Tertiary: Text-only with hover effect
@@ -462,12 +514,14 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 - Subtle hover and press animations
 
 **Input Fields:**
+
 - Consistent with card styling (glassmorphism)
 - Clear focus states with brand color highlight
 - Floating labels that animate on focus
 - Helper text for additional context
 
 **Iconography:**
+
 - Rounded, friendly icon style
 - Two weights: regular and bold
 - Primary brand icons incorporate the 👀 motif
@@ -477,17 +531,20 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 #### 6.5.5 Animation Principles
 
 **Micro-interactions:**
+
 - Subtle scale effects on hover (1.02-1.05x)
 - Smooth transitions between states (200-300ms)
 - Easing functions: ease-in-out for most transitions
 - Playful bounce effects for important actions
 
 **Page Transitions:**
+
 - Fade and slight slide for page changes
 - Content elements enter with staggered timing
 - Card elements have subtle floating animation
 
 **Loading States:**
+
 - Branded loading spinner incorporating the 👀 icon
 - Skeleton states for content loading
 - Progress indicators for longer operations
@@ -495,6 +552,7 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 #### 6.5.6 Layout Principles
 
 **Grid System:**
+
 - 12-column grid for desktop layouts
 - 8px base unit for spacing system
 - Responsive breakpoints:
@@ -503,11 +561,13 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
   - Desktop: > 1024px
 
 **Whitespace:**
+
 - Generous whitespace for content breathing room
 - Consistent spacing scale: 8px, 16px, 24px, 32px, 48px, 64px
 - Increased spacing around important elements
 
 **Responsive Behavior:**
+
 - Mobile-first approach
 - Stacking of elements on smaller screens
 - Collapsible panels for complex tools
@@ -521,6 +581,33 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 - Support for screen readers
 - Color not used as the sole means of conveying information
 
+#### 6.5.8 Design System Documentation
+
+HeyLook's design system is documented and showcased through Storybook to provide a comprehensive reference for developers and designers. The documentation is organized into the following sections:
+
+**Colors:**
+
+- Primary color palette with main, dark, and light variants
+- Secondary color palette with main, dark, and light variants
+- Neutral color scale from white to black
+- Semantic colors for feedback and status indications
+- Each color is displayed with its name and hex value for easy reference
+
+**Typography:**
+
+- Heading styles (h1-h6) with size, weight, and line height specifications
+- Body text variations (large, regular, small) with complete styling details
+- Utility text styles (captions, button text, form labels)
+- Each typography style includes visual examples and detailed specifications
+
+**Components:**
+
+- Button variants including primary and secondary styles with states (default, hover, disabled)
+- Form elements including inputs, selects, textareas, checkboxes, and radio buttons
+- Card layouts with various content arrangements
+- Alert and notification components with semantic color indicators
+
+The Storybook documentation serves as a living style guide that evolves alongside the application. It ensures consistency in implementation and provides a central reference for the HeyLook design language.
 
 ## 7. Authentication and Authorization
 
@@ -589,21 +676,25 @@ HeyLook's visual design draws inspiration from modern, vibrant applications like
 ### 11.1 Phase 1: MVP (1 Month)
 
 #### Week 1:
+
 - Set up project structure and core architecture
 - Implement basic proxy rendering
 - Create user authentication system
 
 #### Week 2:
+
 - Develop annotation layer and basic tools
 - Implement session sharing and collaboration foundations
 - Create database structure and API endpoints
 
 #### Week 3:
+
 - Build Figma embedding and basic comparison view
 - Implement issue tracking system
 - Develop UI and styling
 
 #### Week 4:
+
 - Integrate with Slack for sharing
 - Implement export functionality
 - Testing, bug fixing, and polish
